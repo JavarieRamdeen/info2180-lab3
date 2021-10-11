@@ -2,6 +2,7 @@
 window.onload = function()
 {
 	var slot = document.getElementById("board").children;
+	var state = document.getElementById("status");
 	console.log(slot);
 	
 	for(let i=0; i < 9; i++)
@@ -9,7 +10,7 @@ window.onload = function()
 		slot[i].setAttribute("class","square");
 	}
 	
-	var myList = [0,0,0,0,0,0,0,0,0];
+	var myList = [0,1,2,3,4,5,6,7,8];
 	var count = 0;
 	var position;
 	
@@ -53,19 +54,31 @@ window.onload = function()
 	
 	function clickHandler()
 	{
-		if(count%2==0)
+		if (count%2==0)
 		{
 			console.log(slot[position]);
 			slot[position].innerHTML = "X";
 			slot[position].classList.add('X');
+			myList[position]="X";
+			console.log(myList);
+			if (Winner() == true)
+			{
+				state.innerHTML = "Congratulations! X is the Winner!"
+			}
 		}
 		else
 		{
 			console.log(slot[position]);
 			slot[position].innerHTML = "O";
 			slot[position].classList.add('O');
+			myList[position]="O";
+			console.log(myList);
+			if (Winner() == true)
+			{
+				state.innerHTML = "Congratulations! O is the Winner!"
+			}
 		}
-		count++
+		count++;
 	}
 	
 	function mouseOver() 
@@ -76,5 +89,43 @@ window.onload = function()
 	function mouseOut() 
 	{
 		slot[position].classList.remove('hover');
+	}
+	
+	function Winner()
+	{
+		if ((checkRows()==true) || (checkDiaganols()==true) || (checkColoumns()== true))
+		{
+			return true
+		}
+		else
+		{
+			return false
+		}
+	}
+	
+	function checkRows()
+	{
+		if ((myList[0] == myList[1] && myList[1] == myList[2]) || (myList[3] == myList[4] && myList[4]== myList[5]) || (myList[6] == myList[7] && myList[7] == myList[8]))
+		{
+			return true;
+
+		}
+		return false
+	}
+	function checkDiaganols()
+	{
+		if ((myList[0] == myList[4] && myList[4] == myList[8]) || (myList[2] == myList[4] && myList[4] == myList[6]))
+		{
+			return true;
+		}
+		return false
+	}
+	function checkColoumns()
+	{
+		if ((myList[0] == myList[3] && myList[3] == myList[6]) || (myList[1] == myList[4] && myList[4]== myList[7]) || (myList[2] == myList[5] && myList[5] == myList[8]))
+		{
+			return true;
+		}
+		return false
 	}
 }
