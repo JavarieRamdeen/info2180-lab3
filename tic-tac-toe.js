@@ -57,6 +57,10 @@ window.onload = function()
 	
 	function clickHandler()
 	{
+		if((slot[position].innerHTML == "X") || (slot[position].innerHTML == "O") || state.innerHTML == "Congratulations! X is the Winner!" || state.innerHTML == "Congratulations! O is the Winner!")
+		{
+			return;
+		}
 		if (count%2==0)
 		{
 			console.log(slot[position]);
@@ -68,6 +72,7 @@ window.onload = function()
 			{
 				state.innerHTML = "Congratulations! X is the Winner!"
 			}
+			count++;
 		}
 		else
 		{
@@ -80,8 +85,8 @@ window.onload = function()
 			{
 				state.innerHTML = "Congratulations! O is the Winner!"
 			}
+			count++;
 		}
-		count++;
 	}
 	
 	function mouseOver() 
