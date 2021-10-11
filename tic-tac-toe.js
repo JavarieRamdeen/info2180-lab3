@@ -3,7 +3,9 @@ window.onload = function()
 {
 	var slot = document.getElementById("board").children;
 	var state = document.getElementById("status");
-	console.log(slot);
+	var rst = document.getElementsByClassName("btn")[0];
+	
+	console.log(rst);
 	
 	for(let i=0; i < 9; i++)
 	{
@@ -14,6 +16,7 @@ window.onload = function()
 	var count = 0;
 	var position;
 	
+	rst.addEventListener("click",function(){rstGame();});
 	
 	slot[0].onmouseover = function() {position = 0; mouseOver()};
 	slot[0].onmouseout = function() {position = 0; mouseOut()};
@@ -127,5 +130,18 @@ window.onload = function()
 			return true;
 		}
 		return false
+	}
+	
+	function rstGame()
+	{
+		state.innerHTML = "Move your mouse over a square and click to play an X or an O."
+		myList = [0,1,2,3,4,5,6,7,8];
+		count = 0;
+		for(let i=0; i < 9; i++)
+		{
+			slot[i].innerHTML = "";
+			slot[i].classList.remove('X');
+			slot[i].classList.remove('O');
+		}
 	}
 }
